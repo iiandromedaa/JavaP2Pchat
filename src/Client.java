@@ -8,8 +8,8 @@ public class Client {
 
     private Client() {}
 
-    static void runClient(String host) throws IOException {
-        Socket socket = new Socket(host, 1983);
+    static void runClient(String host, int port) throws IOException {
+        Socket socket = new Socket(host, port);
         DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
         BufferedReader ServerbufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         BufferedReader keyboardBufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -29,3 +29,4 @@ public class Client {
     }
 
 }
+

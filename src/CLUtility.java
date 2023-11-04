@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
+import com.dosse.upnp.UPnP;
 
 public class CLUtility {
 
@@ -40,6 +41,20 @@ public class CLUtility {
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }  
+    }
+
+    public static void portForward(int port) {
+        if (UPnP.isUPnPAvailable()) { //is UPnP available?
+            if (UPnP.isMappedTCP(port)) { //is the port already mapped?
+                System.out.println("UPnP port forwarding not enabled: port is already mapped");
+            } else if (UPnP.openPortTCP(port)) { //try to map port
+                System.out.println("UPnP port forwarding enabled");
+            } else {
+                System.out.println("UPnP port forwarding failed");
+            }
+        } else {
+            System.out.println("UPnP is not available");
+        }
     }
 
 }

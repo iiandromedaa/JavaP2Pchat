@@ -9,8 +9,8 @@ public class Server {
 
     private Server() {}
 
-    static void runServer() throws IOException {
-        ServerSocket serverSocket = new ServerSocket(1983);
+    static void runServer(int port) throws IOException {
+        ServerSocket serverSocket = new ServerSocket(port);
         Socket socket = serverSocket.accept();
         System.out.println("Connected");
 

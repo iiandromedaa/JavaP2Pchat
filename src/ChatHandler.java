@@ -8,13 +8,15 @@ public class ChatHandler {
 
     public static void main(String[] args) throws Exception {
         final String os = System.getProperty("os.name");
+        final int port = 1983;
         Scanner scanscan = new Scanner(System.in);
         System.out.println("Welcome to Jchat! Your host is: " + InetAddress.getLocalHost().getHostAddress());
         switch(CLUtility.switchValidator("1) Host \n2) Connect to host \n3) Exit", 3, scanscan)) {
             case 1:
                 CLUtility.clear(os);
+                CLUtility.portForward(port);
                 try {
-                    Server.runServer();
+                    Server.runServer(port);
                 } catch (IOException e) {
                     System.exit(1);
                 }
@@ -24,7 +26,7 @@ public class ChatHandler {
                     try {
                         System.out.println("Enter host to connect: ");
                         String host = scanscan.next();
-                        Client.runClient(host);
+                        Client.runClient(host, port);
                         break;
                     } catch (ConnectException e) {
                         System.out.println("Connection refused.");
